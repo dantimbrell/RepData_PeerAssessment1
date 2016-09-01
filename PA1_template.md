@@ -1,15 +1,30 @@
----
-title: "Week2_Assignment"
-output: 
-  html_document: 
-    keep_md: yes
----
+# Week2_Assignment
 
 
 
-```{r, echo=TRUE}
+
+```r
 library(dplyr)
+```
 
+```
+## 
+## Attaching package: 'dplyr'
+```
+
+```
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+```
+
+```
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+```
+
+```r
 activity<-read.csv('~/Documents/coursera/reproduce/activity.csv')
 activity<-na.omit(activity)
 g<-group_by(activity, date)
@@ -20,16 +35,32 @@ hist(a$total, freq=TRUE, breaks = length(a$total), col = "pink", xlab =
        "Total steps per day", main = "Histogram of Total Steps per day")
 abline(v=mean(a$total), col = "red")
 abline(v=median(a$total), col = "black")
+```
 
+![](PA1_template_files/figure-html/unnamed-chunk-1-1.png)<!-- -->
+
+```r
 #The mean is:
 a1_mean<-mean(a$total)
 a1_mean
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 #The median is:
 a1_median<-median(a$total)
 a1_median
 ```
 
-```{r, echo=TRUE}
+```
+## [1] 10765
+```
+
+
+```r
 library(dplyr)
 
 activity<-read.csv('~/Documents/coursera/reproduce/activity.csv')
@@ -42,12 +73,21 @@ plot(a$interval, a$average, type="l", col = "blue", xlab = "Interval",
      steps per day for each interval")
 
 abline( v= a$interval[a$average==max(a$average)], col = "red")
-#The most active interval is:
-a$interval[a$average==max(a$average)]
-
 ```
 
-```{r, echo=TRUE}
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+
+```r
+#The most active interval is:
+a$interval[a$average==max(a$average)]
+```
+
+```
+## [1] 835
+```
+
+
+```r
 library(dplyr)
 activity<-read.csv('~/Documents/coursera/reproduce/activity.csv')
 cractivity<-na.omit(activity)
@@ -57,7 +97,13 @@ a<-summarise(g, average = mean(steps))
 
 #The number of NA rows is:
 sum(is.na(activity))
+```
 
+```
+## [1] 2304
+```
+
+```r
 #Fill in NAs with average for that interval
 repeated<-rep(a$average, length(activity$steps)/length(a$interval))
 activity$repeated<-repeated
@@ -71,22 +117,50 @@ hist(a$total, freq=TRUE, breaks = length(a$total), col = "pink", xlab =
        "Total steps per day", main = "Histogram of Total Steps per day, NA included")
 abline(v=mean(a$total), col = "red")
 abline(v=median(a$total), col = "black")
+```
 
+![](PA1_template_files/figure-html/unnamed-chunk-3-1.png)<!-- -->
+
+```r
 #The mean is:
 a2_mean<-mean(a$total)
 a2_mean
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 #The median is:
 a2_median<-median(a$total)
 a2_median
+```
 
+```
+## [1] 10766.19
+```
+
+```r
 #The difference of mean before is:
 a2_mean-a1_mean
+```
 
+```
+## [1] 0
+```
+
+```r
 #The difference of median before is:
 a2_median-a1_median
 ```
 
-```{r, echo=TRUE}
+```
+## [1] 1.188679
+```
+
+
+```r
 library(dplyr)
 activity<-read.csv('~/Documents/coursera/reproduce/activity.csv')
 cractivity<-na.omit(activity)
@@ -96,7 +170,13 @@ a<-summarise(g, average = mean(steps))
 
 #The number of NA rows is:
 sum(is.na(activity))
+```
 
+```
+## [1] 2304
+```
+
+```r
 repeated<-rep(a$average, length(activity$steps)/length(a$interval))
 activity$repeated<-repeated
 activity$steps[is.na(activity$steps)]<-activity$repeated[is.na(activity$steps)]
@@ -125,3 +205,5 @@ legend(1500,200,  c("Weekday","Weekend"),
        lty=c(1,1), 
        lwd=c(2.5,2.5),col=c("blue","red"))
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-4-1.png)<!-- -->
